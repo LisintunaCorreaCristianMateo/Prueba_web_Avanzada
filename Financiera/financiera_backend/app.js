@@ -1,9 +1,8 @@
 import express from "express";
-import cors from "cors";// Middleware para permitir peticiones desde (frontend) 
-import dotenv from "dotenv";// Librería para leer variables de entorno desde el archivo .env
+import cors from "cors";
+import dotenv from "dotenv";
 import {sequelize} from "./config/database.js";
-import {router} from "./routes/clienteRoutes.js";// Importar las rutas de empleados
-
+import {router} from "./routes/clienteRoutes.js";
 dotenv.config();
 const app = express();
 // Middleware (para manejar JSON y CORS)
@@ -19,8 +18,8 @@ app.use("/api/clientes", router);
 
 const iniciarServidor = async () => {
   try {
-    await sequelize.authenticate();//intenta conectar con la base de datos
-    await sequelize.sync(); // Crea tablas si no existen
+    await sequelize.authenticate();
+    await sequelize.sync(); 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => console.log(`Servidor ejecutándose en el puerto ${PORT}`));
     } catch (error) {

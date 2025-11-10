@@ -4,32 +4,26 @@ export const crarCliente=async(req,res)=>{
     try{
         const {nombre,montoCredito}=req.body;
         
-        //validación 1: Campos obligatorios
         if(!nombre || montoCredito == null || montoCredito === undefined){
             return res.status(400).json({message:"Faltan datos obligatorios: nombre y montoCredito"});
         }
         
-        //validación 2: Nombre no vacío
         if(nombre.trim() === ""){
             return res.status(400).json({message:"El nombre no puede estar vacío"});
         }
         
-        //validación 3: Monto debe ser número
         if(typeof montoCredito !== 'number' || isNaN(montoCredito)){
             return res.status(400).json({message:"El monto del crédito debe ser un número válido"});
         }
         
-        //validación 4: No puede ser negativo
         if(montoCredito < 0){
             return res.status(400).json({message:"El monto del crédito no puede ser negativo"});
         }
         
-        //validación 5: No puede ser cero
         if(montoCredito === 0){
             return res.status(400).json({message:"El monto del crédito debe ser mayor a cero"});
         }
         
-        //validación 6: Monto máximo
         if(montoCredito > 500000){
             return res.status(400).json({message:"El monto del crédito no puede ser mayor a $500,000"});
         }
